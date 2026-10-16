@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-commerce
 
-## Getting Started
+Aplicación de comercio electrónico desarrollada con Next.js y TypeScript.
 
-First, run the development server:
+## Configuración
+
+1. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+2. Crea `.env.local` en la raíz del proyecto y configura la URL de la API. Usa el nombre de variable que lee `app/lib/api-client.ts`.
+
+   ```env
+   # Ejemplo: reemplaza el nombre por el que espera api-client.ts
+   API_BASE_URL=http://localhost:8000
+   ```
+
+3. Asegúrate de que la API esté ejecutándose y accesible desde la aplicación.
+
+## Ejecutar el proyecto
+
+Inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Otros comandos habituales, si están definidos en `package.json`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+npm run lint
+```
 
-## Learn More
+## Rutas y funcionalidades
 
-To learn more about Next.js, take a look at the following resources:
+| Ruta | Funcionalidad |
+|---|---|
+| `/catalogo` | Consulta y muestra el catálogo de productos. |
+| `/catalogo/products/[id]` | Muestra el detalle de un producto. |
+| `/login` | Formulario de inicio de sesión. |
+| `/orders/[id]` | Destino al que se redirige al crear una orden. |
+| `/orders/[id]/success` | Muestra el resumen de una orden pagada. |
+| `/orders/historial` | Muestra el historial de ordenes con su estado. |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Checkout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+La creación de la orden se realiza mediante `createOrderAction`, que envía los productos y sus cantidades a la API. Después, redirige a `/orders/[id]`. El pago se procesa mediante `processPaymentAction`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
